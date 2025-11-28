@@ -1,0 +1,354 @@
+/* =========================================
+   AGREGAR PACIENTE · PANEL ADMIN
+========================================= */
+
+:root {
+    --primary:       #1976d2;
+    --primary-dark:  #0d47a1;
+    --success:       #4caf50;
+    --warning:       #ff9800;
+    --danger:        #f44336;
+
+    --bg-page:       #f5f9ff;
+    --bg-card:       #ffffff;
+    --border-soft:   #e0e7ff;
+
+    --text-main:     #111827;
+    --text-muted:    #6b7280;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.add-body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.add-header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #ffffff;
+    padding: 16px 0;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+}
+
+.add-header__content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+}
+
+.add-header__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-header__logo {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.add-header__brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.add-header__clinic {
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.add-header__tagline {
+    font-size: 0.78rem;
+    opacity: 0.85;
+}
+
+.add-header__user {
+    text-align: right;
+}
+
+.add-header__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.add-header__back {
+    font-size: 0.9rem;
+    color: #e0f2ff;
+    text-decoration: none;
+}
+
+.add-header__back:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   LAYOUT PRINCIPAL
+========================================= */
+
+.add-main {
+    padding: 26px 0 32px;
+}
+
+.add-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =========================================
+   CARD PRINCIPAL
+========================================= */
+
+.add-card {
+    background: var(--bg-card);
+    border-radius: 18px;
+    box-shadow: 0 6px 22px rgba(15, 23, 42, 0.12);
+    border: 1px solid var(--border-soft);
+    overflow: hidden;
+}
+
+.add-card__header {
+    background: #e3f2fd;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.add-card__title {
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.add-card__subtitle {
+    color: #4b5563;
+    font-size: 0.94rem;
+}
+
+.add-card__body {
+    padding: 24px 24px 26px;
+}
+
+/* =========================================
+   FLASH MESSAGES
+========================================= */
+
+.flash-wrapper {
+    margin-bottom: 16px;
+}
+
+.flash {
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* coinciden con flash-{{ 'error' if ... }} */
+.flash-error {
+    background: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #d32f2f;
+}
+
+.flash-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid #4caf50;
+}
+
+/* =========================================
+   FORMULARIO
+========================================= */
+
+.add-form {
+    margin-top: 8px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #455a64;
+    font-size: 0.9rem;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    font-size: 0.95rem;
+    transition:
+        border-color 0.2s ease-out,
+        box-shadow 0.2s ease-out,
+        background-color 0.2s ease-out;
+    font-family: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.16);
+    background-color: #ffffff;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+/* Fila fecha/hora */
+.add-form__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+/* Búsqueda de pacientes */
+#resultadosBusqueda {
+    font-size: 0.88rem;
+    margin-top: 8px;
+    color: var(--text-muted);
+}
+
+#resultadosBusqueda div {
+    padding: 4px 0;
+    border-bottom: 1px dashed #e5e7eb;
+}
+
+#resultadosBusqueda strong {
+    color: #d32f2f;
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.btn {
+    padding: 11px 22px;
+    border-radius: 9px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.94rem;
+    transition:
+        transform 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        opacity 0.18s ease-out;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 10px 24px rgba(25, 118, 210, 0.35);
+}
+
+.btn-outline {
+    background: #ffffff;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn:hover {
+    opacity: 0.97;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.18);
+}
+
+/* =========================================
+   NOTAS FINALES
+========================================= */
+
+.add-notes {
+    margin-top: 26px;
+    padding-top: 16px;
+    border-top: 1px dashed #e5e7eb;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.add-notes__title {
+    font-size: 0.96rem;
+    margin-bottom: 6px;
+}
+
+.add-notes__list {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+    .add-header__content {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .add-header__user {
+        text-align: left;
+    }
+
+    .add-form__row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .add-container {
+        padding: 0 14px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

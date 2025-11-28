@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/static/css/equipo.css">
+
+<section class="team-page">
+
+    <!-- HERO -->
+    <header class="team-hero">
+        <div class="container">
+            <div class="row gy-4 align-items-center">
+                <div class="col-lg-7">
+                    <p class="team-hero__eyebrow">
+                        Odontología basada en evidencia · Tecnología digital · Trato humano
+                    </p>
+                    <h1 class="team-hero__title">La especialista a cargo de tu sonrisa</h1>
+                    <p class="team-hero__subtitle">
+                        Cada tratamiento es planificado de forma personalizada, apoyado en diagnóstico
+                        digital y una comunicación clara en todo momento.
+                    </p>
+                    <ul class="team-hero__values">
+                        <li>Planes de tratamiento integrales y realistas.</li>
+                        <li>Enfoque en soluciones mínimamente invasivas.</li>
+                        <li>Seguimiento cercano antes, durante y después de la atención.</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="team-hero__metrics">
+                        <article class="metric-card">
+                            <span class="metric-card__label">Experiencia clínica</span>
+                            <span class="metric-card__value">+10 años</span>
+                            <span class="metric-card__detail">en implantología y rehabilitación oral</span>
+                        </article>
+                        <article class="metric-card">
+                            <span class="metric-card__label">Casos tratados</span>
+                            <span class="metric-card__value">+1,200</span>
+                            <span class="metric-card__detail">pacientes que recuperaron función y estética</span>
+                        </article>
+                        <article class="metric-card">
+                            <span class="metric-card__label">Enfoque</span>
+                            <span class="metric-card__value">360º</span>
+                            <span class="metric-card__detail">integración de estética, función y salud</span>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PERFIL DE LA DOCTORA: FOTO + TEXTO AL COSTADO -->
+    <section class="doctor-section">
+        <div class="container">
+            <div class="doctor-layout">
+                <!-- Imagen -->
+                <figure class="doctor-photo-card">
+                    <div class="doctor-photo-card__frame">
+                        <img src="/static/img/Doctora.png" alt="Dra. Juan Pérez">
+                    </div>
+                    <figcaption class="doctor-photo-card__caption">
+                        Atención en Clínica Dental Sonrisa Perfecta
+                    </figcaption>
+                </figure>
+
+                <!-- Texto -->
+                <article class="doctor-info">
+                    <div class="doctor-info__badge">
+                        Implantología avanzada y rehabilitación oral
+                    </div>
+
+                    <h2 class="doctor-info__name">O.D Fabiola Quiroz</h2>
+                    <p class="doctor-info__role">Especialista en Implantes</p>
+
+                    <p class="doctor-info__bio">
+                        Más de 10 años de experiencia devolviendo sonrisas con procedimientos modernos
+                        y mínimamente invasivos, priorizando siempre la comodidad y seguridad del paciente.
+                    </p>
+
+                    <div class="doctor-info__grid">
+                        <div>
+                            <h3 class="doctor-info__subtitle">Áreas de experiencia</h3>
+                            <ul class="doctor-info__list">
+                                <li>Cirugía guiada por computador.</li>
+                                <li>Implantes de carga inmediata.</li>
+                                <li>Manejo de casos complejos de atrofia ósea.</li>
+                            </ul>
+                        </div>
+
+                        <div class="doctor-info__meta">
+                            <div>
+                                <span class="doctor-info__meta-label">Formación</span>
+                                <span class="doctor-info__meta-value">
+                                    Implantología Oral · Programa de alta especialidad.
+                                </span>
+                            </div>
+                            <div>
+                                <span class="doctor-info__meta-label">Enfoque</span>
+                                <span class="doctor-info__meta-value">
+                                    Rehabilitaciones funcionales y estéticas con resultados a largo plazo.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPROMISO CLÍNICO -->
+    <section class="team-commitment">
+        <div class="container">
+            <div class="team-commitment__panel">
+                <div class="team-commitment__text">
+                    <h2>Un compromiso real con tu bienestar</h2>
+                    <p>
+                        La actualización constante y el trabajo interdisciplinario permiten ofrecer
+                        alternativas de tratamiento claras, seguras y adaptadas a cada paciente.
+                    </p>
+                    <ul class="team-commitment__list">
+                        <li>Revisión conjunta de casos complejos con otras especialidades.</li>
+                        <li>Protocolos estrictos de bioseguridad y esterilización.</li>
+                        <li>Comunicación cercana para disminuir la ansiedad dental.</li>
+                    </ul>
+                </div>
+                <div class="team-commitment__meta">
+                    <div class="badge-pill">
+                        <span class="badge-pill__label">Actualización anual</span>
+                        <span class="badge-pill__value">+100 horas en cursos y congresos</span>
+                    </div>
+                    <div class="badge-pill">
+                        <span class="badge-pill__label">Satisfacción</span>
+                        <span class="badge-pill__value">4.9 / 5 según encuestas internas</span>
+                    </div>
+                    <div class="badge-pill">
+                        <span class="badge-pill__label">Ética profesional</span>
+                        <span class="badge-pill__value">
+                            Diagnósticos honestos, sin tratamientos innecesarios.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</section>
+{% endblock %}

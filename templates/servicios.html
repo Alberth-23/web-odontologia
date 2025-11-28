@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/static/css/servicios.css">
+
+<section class="servicios-hero text-center">
+    <p class="servicios-hero__eyebrow">
+        Tratamientos integrales · Diagnóstico digital · Resultados predecibles
+    </p>
+    <h1 class="servicios-hero__title">Servicios Dentales Profesionales</h1>
+    <p class="servicios-hero__subtitle">
+        Tecnología moderna, precisión y cuidado especializado en cada tratamiento.
+    </p>
+
+    <div class="servicios-hero__highlights">
+        <div class="servicios-highlight">
+            <span class="servicios-highlight__label">Prevención</span>
+            <span class="servicios-highlight__value">Limpieza & profilaxis avanzada</span>
+        </div>
+        <div class="servicios-highlight">
+            <span class="servicios-highlight__label">Estética</span>
+            <span class="servicios-highlight__value">Blanqueamiento y carillas</span>
+        </div>
+        <div class="servicios-highlight">
+            <span class="servicios-highlight__label">Rehabilitación</span>
+            <span class="servicios-highlight__value">Implantes y endodoncia</span>
+        </div>
+    </div>
+</section>
+
+<section class="servicios-grid">
+    <!-- Limpieza -->
+    <article class="servicio-tile">
+        <div class="servicio-tile__media">
+            <div class="servicio-tile__orbit">
+                <img src="/static/img/Limpieza.png" alt="Limpieza Dental">
+            </div>
+        </div>
+        <div class="servicio-tile__body">
+            <header class="servicio-tile__header">
+                <span class="servicio-tile__tag servicio-tile__tag--blue">Prevención</span>
+                <h3 class="servicio-tile__title">Limpieza Dental</h3>
+            </header>
+            <p class="servicio-tile__text">
+                Elimina placa, sarro y manchas superficiales con equipos modernos que protegen el esmalte.
+            </p>
+        </div>
+    </article>
+
+    <!-- Ortodoncia -->
+    <article class="servicio-tile">
+        <div class="servicio-tile__media">
+            <div class="servicio-tile__orbit">
+                <img src="/static/img/Ortodoncia.png" alt="Ortodoncia">
+            </div>
+        </div>
+        <div class="servicio-tile__body">
+            <header class="servicio-tile__header">
+                <span class="servicio-tile__tag servicio-tile__tag--violet">Alineación</span>
+                <h3 class="servicio-tile__title">Ortodoncia</h3>
+            </header>
+            <p class="servicio-tile__text">
+                Corrección dental con brackets metálicos, estéticos o alineadores invisibles.
+            </p>
+        </div>
+    </article>
+
+    <!-- Blanqueamiento -->
+    <article class="servicio-tile">
+        <div class="servicio-tile__media">
+            <div class="servicio-tile__orbit">
+                <img src="/static/img/Blanqueado.png" alt="Blanqueamiento Dental">
+            </div>
+        </div>
+        <div class="servicio-tile__body">
+            <header class="servicio-tile__header">
+                <span class="servicio-tile__tag servicio-tile__tag--aqua">Estética</span>
+                <h3 class="servicio-tile__title">Blanqueamiento Dental</h3>
+            </header>
+            <p class="servicio-tile__text">
+                Mejora el tono de tus dientes usando técnicas seguras y resultados en una sola sesión.
+            </p>
+        </div>
+    </article>
+
+    <!-- Implantes -->
+    <article class="servicio-tile">
+        <div class="servicio-tile__media">
+            <div class="servicio-tile__orbit">
+                <img src="/static/img/implantes.png" alt="Implantes Dentales">
+            </div>
+        </div>
+        <div class="servicio-tile__body">
+            <header class="servicio-tile__header">
+                <span class="servicio-tile__tag servicio-tile__tag--green">Rehabilitación</span>
+                <h3 class="servicio-tile__title">Implantes Dentales</h3>
+            </header>
+            <p class="servicio-tile__text">
+                Reemplazo funcional y estético para dientes perdidos mediante titanio biocompatible.
+            </p>
+        </div>
+    </article>
+
+    <!-- Carillas -->
+    <article class="servicio-tile">
+        <div class="servicio-tile__media">
+            <div class="servicio-tile__orbit">
+                <img src="/static/img/Cari.png" alt="Carillas Estéticas">
+            </div>
+        </div>
+        <div class="servicio-tile__body">
+            <header class="servicio-tile__header">
+                <span class="servicio-tile__tag servicio-tile__tag--pink">Diseño de sonrisa</span>
+                <h3 class="servicio-tile__title">Carillas Estéticas</h3>
+            </header>
+            <p class="servicio-tile__text">
+                Mejora color, forma y tamaño logrando una sonrisa perfecta en poco tiempo.
+            </p>
+        </div>
+    </article>
+
+    <!-- Endodoncia -->
+    <article class="servicio-tile">
+        <div class="servicio-tile__media">
+            <div class="servicio-tile__orbit">
+                <img src="/static/img/Endodoncia.png" alt="Endodoncia">
+            </div>
+        </div>
+        <div class="servicio-tile__body">
+            <header class="servicio-tile__header">
+                <span class="servicio-tile__tag servicio-tile__tag--amber">Conservadora</span>
+                <h3 class="servicio-tile__title">Endodoncia</h3>
+            </header>
+            <p class="servicio-tile__text">
+                Tratamiento para eliminar infecciones profundas y salvar piezas dentales dañadas.
+            </p>
+        </div>
+    </article>
+</section>
+
+<section class="servicios-cta text-center">
+    <h2 class="servicios-cta__title">¿Listo para agendar tu tratamiento?</h2>
+    <p class="servicios-cta__text">
+        Reserva tu cita y recibe un diagnóstico completo con un plan de tratamiento claro y personalizado.
+    </p>
+    <a href="/reservar" class="btn-cita">Reservar una Cita</a>
+</section>
+
+{% endblock %}

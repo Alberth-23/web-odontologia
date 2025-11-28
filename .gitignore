@@ -1,0 +1,10 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+*.log
+instance/
+config.py
+secrets.py
+database.db
+.DS_Store

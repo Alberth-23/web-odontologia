@@ -1,0 +1,183 @@
+<!-- templates/admin_agregar.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>➕ Agregar Paciente - Panel de Control</title>
+
+    <link rel="stylesheet" href="/static/css/panel_agregar.css">
+</head>
+<body class="add-body">
+
+<header class="add-header">
+    <div class="add-header__content">
+        <div class="add-header__brand">
+            <div class="add-header__logo">🦷</div>
+            <div class="add-header__brand-text">
+                <span class="add-header__clinic">Panel de Control</span>
+                <span class="add-header__tagline">Gestión de Citas</span>
+            </div>
+        </div>
+        <div class="add-header__user">
+            <h1 class="add-header__title">Agregar Paciente Manual</h1>
+            <a href="{{ url_for('admin_panel') }}" class="add-header__back">
+                ← Volver al panel
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="add-main">
+    <div class="add-container">
+
+        <section class="add-card">
+            <header class="add-card__header">
+                <h2 class="add-card__title">➕ Registrar Nuevo Paciente</h2>
+                <p class="add-card__subtitle">
+                    Use esta opción para agregar citas tomadas por teléfono o de forma presencial.
+                </p>
+            </header>
+
+            <div class="add-card__body">
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    <div class="flash-wrapper">
+                    {% for category, message in messages %}
+                      <div class="flash flash-{{ 'error' if category == 'error' else 'success' }}">
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+                    </div>
+                  {% endif %}
+                {% endwith %}
+
+                <!-- 🔍 Búsqueda de pacientes existentes -->
+                <div class="form-group">
+                    <label for="buscarPaciente">🔍 Buscar paciente (evita duplicados)</label>
+                    <input type="text" id="buscarPaciente"
+                           placeholder="Escriba nombre o teléfono..."
+                           oninput="buscarPaciente(this.value)">
+                    <div id="resultadosBusqueda"></div>
+                </div>
+
+                <form method="POST" class="add-form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo *</label>
+                        <input type="text" id="nombre" name="nombre"
+                               value="{{ datos.nombre if datos }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono *</label>
+                        <input type="tel" id="telefono" name="telefono"
+                               value="{{ datos.telefono if datos }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="servicio">Servicio *</label>
+                        <select id="servicio" name="servicio" required>
+                            <option value="">Seleccione un servicio</option>
+                            <option value="Limpieza Dental" {% if datos and datos.servicio == "Limpieza Dental" %}selected{% endif %}>Limpieza Dental</option>
+                            <option value="Blanqueamiento" {% if datos and datos.servicio == "Blanqueamiento" %}selected{% endif %}>Blanqueamiento</option>
+                            <option value="Ortodoncia" {% if datos and datos.servicio == "Ortodoncia" %}selected{% endif %}>Ortodoncia</option>
+                            <option value="Extracción" {% if datos and datos.servicio == "Extracción" %}selected{% endif %}>Extracción</option>
+                            <option value="Carillas" {% if datos and datos.servicio == "Carillas" %}selected{% endif %}>Carillas</option>
+                            <option value="Consulta General" {% if datos and datos.servicio == "Consulta General" %}selected{% endif %}>Consulta General</option>
+                        </select>
+                    </div>
+
+                    <div class="add-form__row">
+                        <div class="form-group">
+                            <label for="fecha">Fecha *</label>
+                            <input type="date" id="fecha" name="fecha"
+                                   value="{{ datos.fecha if datos }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hora">Hora *</label>
+                            <select id="hora" name="hora" required>
+                                <option value="">Seleccione hora</option>
+                                <option value="08:00" {% if datos and datos.hora == "08:00" %}selected{% endif %}>08:00 AM</option>
+                                <option value="09:00" {% if datos and datos.hora == "09:00" %}selected{% endif %}>09:00 AM</option>
+                                <option value="10:00" {% if datos and datos.hora == "10:00" %}selected{% endif %}>10:00 AM</option>
+                                <option value="11:00" {% if datos and datos.hora == "11:00" %}selected{% endif %}>11:00 AM</option>
+                                <option value="14:00" {% if datos and datos.hora == "14:00" %}selected{% endif %}>02:00 PM</option>
+                                <option value="15:00" {% if datos and datos.hora == "15:00" %}selected{% endif %}>03:00 PM</option>
+                                <option value="16:00" {% if datos and datos.hora == "16:00" %}selected{% endif %}>04:00 PM</option>
+                                <option value="17:00" {% if datos and datos.hora == "17:00" %}selected{% endif %}>05:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje adicional</label>
+                        <textarea id="mensaje" name="mensaje"
+                                  placeholder="Notas internas, alergias, antecedentes, etc.">{{ datos.mensaje if datos }}</textarea>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary">
+                            ✅ Registrar y Autorizar
+                        </button>
+                        <a href="{{ url_for('admin_panel') }}" class="btn btn-outline">
+                            ← Cancelar
+                        </a>
+                    </div>
+                </form>
+
+                <section class="add-notes">
+                    <h3 class="add-notes__title">💡 Notas</h3>
+                    <ul class="add-notes__list">
+                        <li>Las citas manuales se registran como <strong>autorizadas</strong>.</li>
+                        <li>El sistema verifica que el horario seleccionado no esté ocupado.</li>
+                    </ul>
+                </section>
+            </div>
+        </section>
+    </div>
+</main>
+
+<script>
+        // Datos para búsqueda (últimas 20 reservas)
+        const reservas_pasadas = [
+            {% for r in reservas_pasadas %}
+            { nombre: "{{ r.nombre|e }}", telefono: "{{ r.telefono|e }}", fecha: "{{ r.fecha }}", hora: "{{ r.hora }}" },
+            {% endfor %}
+        ];
+
+        function buscarPaciente(query) {
+            const resultadosDiv = document.getElementById('resultadosBusqueda');
+            if (query.length < 3) {
+                resultadosDiv.innerHTML = '';
+                return;
+            }
+
+            const resultados = reservas_pasadas.filter(r => 
+                r.nombre.toLowerCase().includes(query.toLowerCase()) ||
+                r.telefono.includes(query)
+            ).slice(0, 5);
+
+            if (resultados.length === 0) {
+                resultadosDiv.innerHTML = '<div style="color:#777;">No se encontraron coincidencias</div>';
+                return;
+            }
+
+            let html = '<div><strong>⚠️ Pacientes similares:</strong></div>';
+            resultados.forEach(r => {
+                html += `<div>
+                    <strong>${r.nombre}</strong> • ${r.telefono} • ${r.fecha} ${r.hora}
+                </div>`;
+            });
+            resultadosDiv.innerHTML = html;
+        }
+
+        // Fecha mínima hoy
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha').min = today;
+        });
+</script>
+</body>
+</html>

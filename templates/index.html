@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% block title %}Inicio - Clínica Dental{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ============================
+     HERO PRINCIPAL
+============================= -->
+<section class="hero-grid">
+  <div class="container">
+    <div class="hero-grid__panel">
+      <div class="row gy-5 align-items-center">
+
+        <!-- Columna izquierda -->
+        <div class="col-lg-6">
+          <p class="hero-grid__eyebrow">
+            Clínica Dental Digital · Escáner 3D · Sedación Consciente
+          </p>
+
+          <h1 class="hero-grid__title">
+            Odontología de alta precisión
+            <span>para una sonrisa del futuro</span>
+          </h1>
+
+          <p class="hero-grid__subtitle">
+            Combinamos tecnología avanzada, diagnóstico digital y un equipo especializado
+            para ofrecerte tratamientos mínimamente invasivos y resultados estéticos naturales.
+          </p>
+
+          <div class="hero-grid__actions">
+            <a href="/reservar" class="btn hero-grid__cta-main">Reservar cita ahora</a>
+            <a href="/servicios" class="btn hero-grid__cta-secondary">Ver tratamientos</a>
+          </div>
+
+          <div class="hero-grid__meta">
+            <div class="hero-meta-item">
+              <span class="hero-meta-item__value">+4.800</span>
+              <span class="hero-meta-item__label">sonrisas rehabilitadas</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="hero-meta-item__value">4.9★</span>
+              <span class="hero-meta-item__label">satisfacción de pacientes</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="hero-meta-item__value">0%</span>
+              <span class="hero-meta-item__label">papel · todo digital</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: tarjeta futurista -->
+        <div class="col-lg-6">
+          <div class="hero-digital-card">
+            <div class="hero-digital-card__badge">
+              Escaneo 3D en 8 segundos
+            </div>
+
+            <div class="hero-digital-card__core">
+              <div class="hero-tooth-orbit">
+                <div class="hero-tooth-orbit__ring hero-tooth-orbit__ring--outer"></div>
+                <div class="hero-tooth-orbit__ring hero-tooth-orbit__ring--inner"></div>
+                <div class="hero-tooth-orbit__tooth">
+                  <span class="hero-tooth-orbit__glow"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-digital-card__footer">
+              <div class="hero-digital-card__item">
+                <span class="label">Ortodoncia invisible</span>
+                <span class="value">Planeación digital completa</span>
+              </div>
+              <div class="hero-digital-card__item">
+                <span class="label">Implantología guiada</span>
+                <span class="value">Cirugías más seguras y precisas</span>
+              </div>
+              <div class="hero-digital-card__item">
+                <span class="label">Monitorización online</span>
+                <span class="value">Seguimiento de tratamiento a distancia</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-availability">
+            <div class="hero-availability__status">
+              <span class="dot"></span>
+              Próxima disponibilidad
+            </div>
+            <div class="hero-availability__slots">
+              <span class="slot">Hoy · 5:30 pm</span>
+              <span class="slot">Mañana · 9:00 am</span>
+              <span class="slot slot--accent">Ver agenda completa</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SERVICIOS DESTACADOS
+============================= -->
+<section class="home-section home-services">
+  <div class="container">
+    <header class="home-section__header">
+      <h2 class="home-section__title">Nuestros Servicios Destacados</h2>
+      <p class="home-section__subtitle">
+        Tratamientos clave para cuidar tu salud bucal con tecnología actual y especialistas dedicados.
+      </p>
+    </header>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card card-feature h-100">
+          <div class="card-body text-center">
+            <img src="/static/img/Limpieza.png" width="80" class="mb-3" alt="Limpieza Dental">
+            <h4 class="fw-bold">Limpieza Dental</h4>
+            <p>
+              Eliminación de placa, sarro y manchas superficiales con equipos que protegen el esmalte.
+            </p>
+            <a href="/servicios" class="btn btn-outline-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card card-feature h-100">
+          <div class="card-body text-center">
+            <img src="/static/img/Cari.png" width="80" class="mb-3" alt="Tratamiento de Caries">
+            <h4 class="fw-bold">Tratamiento de Caries</h4>
+            <p>
+              Restauraciones estéticas y resistentes, cuidando al máximo la estructura dental sana.
+            </p>
+            <a href="/servicios" class="btn btn-outline-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card card-feature h-100">
+          <div class="card-body text-center">
+            <img src="/static/img/Ortodoncia.png" width="80" class="mb-3" alt="Ortodoncia">
+            <h4 class="fw-bold">Ortodoncia</h4>
+            <p>
+              Alineación dental con brackets y alineadores invisibles para una sonrisa armónica.
+            </p>
+            <a href="/servicios" class="btn btn-outline-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     POR QUÉ ELEGIRNOS
+============================= -->
+<section class="home-section home-why">
+  <div class="container">
+    <header class="home-section__header">
+      <h2 class="home-section__title">¿Por qué elegirnos?</h2>
+      <p class="home-section__subtitle">
+        Un enfoque humano y tecnológico para que cada visita sea clara, segura y cómoda.
+      </p>
+    </header>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-box">
+          <h5 class="fw-bold">✔ Profesionales Certificados</h5>
+          <p>Equipo con especialidades actualizadas y amplia experiencia clínica.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-box">
+          <h5 class="fw-bold">✔ Tecnología de Última Generación</h5>
+          <p>Equipos digitales que mejoran el diagnóstico y acortan tiempos de tratamiento.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-box">
+          <h5 class="fw-bold">✔ Atención Personalizada</h5>
+          <p>Escuchamos tus objetivos y diseñamos un plan a tu medida.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     TESTIMONIOS
+============================= -->
+<section class="home-section home-testimonials">
+  <div class="container">
+    <header class="home-section__header">
+      <h2 class="home-section__title">Opiniones de Pacientes</h2>
+      <p class="home-section__subtitle">
+        Historias reales de personas que confiaron en nosotros para transformar su sonrisa.
+      </p>
+    </header>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testimonial-box">
+          <p>"Excelente atención. Me sentí seguro durante todo mi tratamiento."</p>
+          <h6 class="text-primary fw-bold mt-3">— Juan Pérez</h6>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="testimonial-box">
+          <p>"Muy profesionales, resolvieron mi problema en una sola cita."</p>
+          <h6 class="text-primary fw-bold mt-3">— María López</h6>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="testimonial-box">
+          <p>"Tecnología moderna y excelente trato, recomendable al 100%."</p>
+          <h6 class="text-primary fw-bold mt-3">— Carlos Díaz</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+        e.preventDefault();
+        const confirmed = confirm("🔐 ¿Acceder al panel de control?");
+        if (confirmed) {
+          window.location.href = '/login';
+        }
+      }
+    });
+  </script>
+</section>
+
+{% endblock %}

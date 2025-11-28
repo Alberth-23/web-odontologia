@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block title %}Reservar Cita - Clínica Dental{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/static/css/reservar.css">
+
+<section class="reserva-page">
+    <div class="container">
+        <div class="row gy-4 align-items-stretch reserva-layout">
+
+            <!-- Panel informativo -->
+            <div class="col-lg-5">
+                <aside class="reserva-info">
+                    <p class="reserva-info__eyebrow">
+                        Agenda digital · Confirmación segura · Trato personalizado
+                    </p>
+                    <h1 class="reserva-info__title">Reservar Cita</h1>
+                    <p class="reserva-info__subtitle">
+                        Complete el formulario y nuestro equipo confirmará la disponibilidad
+                        de su cita por correo o WhatsApp.
+                    </p>
+
+                    <ul class="reserva-info__list">
+                        <li>Atención por orden de prioridad clínica.</li>
+                        <li>Protocolos de bioseguridad actualizados.</li>
+                        <li>Recordatorios automáticos antes de su cita.</li>
+                    </ul>
+
+                    <div class="reserva-summary">
+                        <h2 class="reserva-summary__title">Próximos horarios disponibles</h2>
+                        <div class="reserva-summary__slots">
+                            <span class="slot">Hoy · 5:30 pm</span>
+                            <span class="slot">Mañana · 9:00 am</span>
+                            <span class="slot">Mañana · 4:00 pm</span>
+                        </div>
+                        <p class="reserva-summary__note">
+                            Los horarios definitivos se confirmarán según la especialidad elegida.
+                        </p>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Formulario de reserva -->
+            <div class="col-lg-7">
+                <div class="reserva-box">
+                    <header class="reserva-box__header">
+                        <h2 class="title">Datos de la cita</h2>
+                        <p class="subtitle">Complete el siguiente formulario para solicitar su cita.</p>
+                        <div class="reserva-badges">
+                            <span class="badge-pill">
+                                <span class="badge-pill__label">Duración estimada</span>
+                                <span class="badge-pill__value">40–60 min</span>
+                            </span>
+                            <span class="badge-pill">
+                                <span class="badge-pill__label">Confirmación</span>
+                                <span class="badge-pill__value">En menos de 24 h hábiles</span>
+                            </span>
+                        </div>
+                    </header>
+
+                    <!-- ✅ Formulario con name e ids intactos -->
+                    <form id="formReserva" class="reserva-form" method="POST">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="input-group-reserva">
+                                    <label for="nombre">Nombre completo</label>
+                                    <input type="text" id="nombre" name="nombre" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="input-group-reserva">
+                                    <label for="correo">Correo electrónico</label>
+                                    <input type="email" id="correo" name="correo" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="input-group-reserva">
+                                    <label for="telefono">Teléfono</label>
+                                    <input type="text" id="telefono" name="telefono" required>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="input-group-reserva">
+                                    <label for="servicio">Servicio</label>
+                                    <select id="servicio" name="servicio" required>
+                                        <option value="">Seleccione un servicio</option>
+                                        <option>Limpieza Dental</option>
+                                        <option>Blanqueamiento</option>
+                                        <option>Ortodoncia</option>
+                                        <option>Extracción</option>
+                                        <option>Carillas</option>
+                                        <option>Consulta General</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="input-group-reserva">
+                                    <label for="fecha">Fecha deseada</label>
+                                    <input type="date" id="fecha" name="fecha" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="input-group-reserva">
+                                    <label for="hora">Hora deseada</label>
+                                    <select id="hora" name="hora" required>
+                                        <option value="">Seleccione hora</option>
+                                        <option value="08:00">08:00 AM</option>
+                                        <option value="09:00">09:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="14:00">02:00 PM</option>
+                                        <option value="15:00">03:00 PM</option>
+                                        <option value="16:00">04:00 PM</option>
+                                        <option value="17:00">05:00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="input-group-reserva">
+                                    <label for="mensaje">Mensaje adicional <span class="optional">(opcional)</span></label>
+                                    <textarea id="mensaje" name="mensaje" placeholder="Puede contarnos el motivo de su consulta, antecedentes o inquietudes específicas."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="reserva-actions">
+                            <button class="btn-reservar" type="submit">Confirmar Reserva</button>
+                            <p class="reserva-legal">
+                                Al enviar este formulario, autoriza el uso de sus datos para la
+                                gestión de su cita y la comunicación relacionada con su atención.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    document.getElementById("formReserva").addEventListener("submit", function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+
+        fetch("/reservar", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "/reserva_exitosa";
+            } else {
+                alert("Error al guardar. Código: " + response.status);
+            }
+        })
+        .catch(err => {
+            console.error("Error:", err);
+            alert("No se pudo conectar al servidor.");
+        });
+    });
+    </script>
+</section>
+{% endblock %}

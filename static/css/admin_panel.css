@@ -1,0 +1,606 @@
+/* =========================================
+   PANEL ADMIN · BASE
+========================================= */
+
+:root {
+    --primary:       #1976d2;
+    --primary-dark:  #0d47a1;
+    --success:       #4caf50;
+    --warning:       #ff9800;
+    --danger:        #f44336;
+
+    --bg-page:       #edf4ff;
+    --bg-sidebar:    #0d47a1;
+    --bg-card:       #ffffff;
+    --border-soft:   #dde6ff;
+
+    --text-main:     #111827;
+    --text-muted:    #6b7280;
+}
+
+/* Reset básico */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body.admin-body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: radial-gradient(circle at 0 0, #dbeafe 0, #f4f7ff 55%, #e5edff 100%);
+    color: var(--text-main);
+}
+
+/* Layout general: sidebar + contenido */
+.admin-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.admin-sidebar {
+    background: linear-gradient(180deg, #0d47a1, #1565c0);
+    color: #e5f2ff;
+    padding: 22px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    box-shadow: 4px 0 18px rgba(15, 23, 42, 0.35);
+}
+
+.admin-sidebar__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-sidebar__logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: radial-gradient(circle at 30% 0, #e0f2ff, #60a5fa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: #0b1f33;
+    box-shadow:
+        0 0 0 2px rgba(15, 23, 42, 0.5),
+        0 0 12px rgba(191, 219, 254, 0.8);
+}
+
+.admin-sidebar__brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.admin-sidebar__clinic {
+    font-size: 0.98rem;
+    font-weight: 600;
+}
+
+.admin-sidebar__tagline {
+    font-size: 0.75rem;
+    opacity: 0.85;
+}
+
+/* Navegación */
+.admin-sidebar__nav-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    opacity: 0.8;
+    margin-bottom: 6px;
+}
+
+.admin-sidebar__nav-link {
+    display: block;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: #e5f2ff;
+    text-decoration: none;
+    opacity: 0.85;
+    transition: background 0.18s ease-out, opacity 0.18s ease-out;
+}
+
+.admin-sidebar__nav-link--active,
+.admin-sidebar__nav-link:hover {
+    background: rgba(15, 23, 42, 0.25);
+    opacity: 1;
+}
+
+/* Usuario */
+.admin-sidebar__user {
+    margin-top: auto;
+    border-top: 1px solid rgba(191, 219, 254, 0.35);
+    padding-top: 12px;
+    font-size: 0.9rem;
+}
+
+.admin-sidebar__user-name {
+    margin-bottom: 4px;
+}
+
+.admin-sidebar__logout {
+    font-size: 0.82rem;
+    color: #bfdbfe;
+    text-decoration: none;
+}
+
+.admin-sidebar__logout:hover {
+    text-decoration: underline;
+}
+
+/* =========================================
+   CONTENIDO PRINCIPAL
+========================================= */
+
+.admin-main {
+    padding: 24px 0 32px;
+}
+
+.admin-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Toolbar superior */
+.admin-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.admin-toolbar__title {
+    font-size: 1.6rem;
+    margin-bottom: 2px;
+}
+
+.admin-toolbar__subtitle {
+    font-size: 0.94rem;
+    color: var(--text-muted);
+}
+
+.admin-toolbar__meta {
+    display: flex;
+    align-items: center;
+}
+
+.toolbar-pill {
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: #e0ecff;
+    border: 1px solid #bfdbfe;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #1d4ed8;
+}
+
+/* Secciones */
+.admin-section {
+    margin-bottom: 24px;
+}
+
+.admin-section--actions {
+    margin-top: 4px;
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+        transform 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        opacity 0.18s ease-out;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.btn-success {
+    background: var(--success);
+    color: #ffffff;
+}
+
+.btn-warning {
+    background: var(--warning);
+    color: #ffffff;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: #ffffff;
+}
+
+.btn-pequeno {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+}
+
+.btn:hover {
+    opacity: 0.96;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.18);
+}
+
+/* Contenedor de acciones */
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* =========================================
+   ESTADÍSTICAS
+========================================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border-radius: 14px;
+    padding: 14px 14px 12px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.12);
+    border: 1px solid var(--border-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-card__label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.stat-card__value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.stat-card__pill {
+    align-self: flex-start;
+    margin-top: 2px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+}
+
+.stat-card__pill--pending {
+    background: #fff7ed;
+    color: #c05621;
+}
+
+.stat-card__pill--ok {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.stat-card__pill--done {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+/* =========================================
+   TABLA DE RESERVAS
+========================================= */
+
+.table-card {
+    background: var(--bg-card);
+    border-radius: 18px;
+    box-shadow: 0 6px 22px rgba(15, 23, 42, 0.12);
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+}
+
+.table-card__header {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.table-card__title {
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+}
+
+.table-card__subtitle {
+    font-size: 0.86rem;
+    color: var(--text-muted);
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Tabla */
+.reservas-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 780px;
+    background: #ffffff;
+}
+
+.reservas-table thead {
+    background: #e3f2fd;
+    color: #0b1f33;
+}
+
+.reservas-table th,
+.reservas-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 0.9rem;
+}
+
+.reservas-table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+}
+
+.reservas-table tbody tr:nth-child(even) {
+    background-color: #f9fbff;
+}
+
+.reservas-table tbody tr:hover {
+    background-color: #eef4ff;
+}
+
+/* Celdas específicas */
+.cell-id {
+    width: 70px;
+}
+
+.chip-id {
+    display: inline-flex;
+    padding: 0.18rem 0.6rem;
+    border-radius: 999px;
+    background: #eff6ff;
+    border: 1px solid #cbd5f5;
+    font-size: 0.8rem;
+    color: #1d4ed8;
+}
+
+.paciente-nombre {
+    font-size: 0.98rem;
+    font-weight: 600;
+}
+
+.paciente-nota {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+.cell-servicio {
+    font-size: 0.9rem;
+}
+
+.reserva-fecha {
+    font-size: 0.88rem;
+}
+
+.reserva-hora {
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: #1565c0;
+}
+
+/* Estados */
+.estado {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.estado-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: currentColor;
+}
+
+.estado-pendiente {
+    background: #eceff1;
+    color: #546e7a;
+}
+
+.estado-autorizada {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.estado-atendida {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.estado-cancelada {
+    background: #ffebee;
+    color: #c62828;
+    text-decoration: line-through;
+}
+
+/* Acciones */
+.acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* Fila vacía */
+.tabla-vacia {
+    text-align: center;
+    padding: 28px 16px;
+    color: var(--text-muted);
+}
+
+.tabla-vacia__icon {
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+}
+
+.tabla-vacia__title {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.tabla-vacia__text {
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   FLASH MESSAGES (usados por el script)
+========================================= */
+
+.flash-wrapper {
+    margin-bottom: 16px;
+}
+
+.flash {
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.flash--success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+.flash--warning {
+    background: #fff8e1;
+    color: #f57c00;
+    border: 1px solid #ffe0b2;
+}
+
+.flash--error,
+.flash--danger {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+.flash--info {
+    background: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #90caf9;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.admin-footer {
+    margin-top: 22px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 960px) {
+    .admin-shell {
+        grid-template-columns: 220px minmax(0, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-shell {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .admin-sidebar {
+        flex-direction: row;
+        align-items: center;
+        padding: 14px 18px;
+        gap: 12px;
+    }
+
+    .admin-sidebar__nav,
+    .admin-sidebar__user {
+        display: none;
+    }
+
+    .admin-main {
+        padding-top: 18px;
+    }
+
+    .admin-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .stats-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .reservas-table th,
+    .reservas-table td {
+        padding: 10px 12px;
+        font-size: 0.88rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .admin-container {
+        padding: 0 16px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

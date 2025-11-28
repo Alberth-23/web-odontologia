@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}🦷 ¡Reserva Confirmada!{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/css/reserva_exitosa.css">
+
+<div class="reserva-exitosa-container">
+    <div class="reserva-exitosa-card">
+        <!-- Ícono de diente SVG -->
+        <div class="reserva-exitosa-tooth-icon">
+            <svg class="reserva-exitosa-tooth" viewBox="0 0 100 100">
+                <path d="M50,10 C65,5 80,20 75,40 C85,50 80,70 60,75 C65,90 55,95 50,95 C45,95 35,90 40,75 C20,70 15,50 25,40 C20,20 35,5 50,10 Z"/>
+                <circle cx="42" cy="45" r="4" fill="#fff"/>
+                <circle cx="58" cy="45" r="4" fill="#fff"/>
+                <path d="M40,60 Q50,68 60,60" stroke="#fff" stroke-width="3" fill="none"/>
+            </svg>
+        </div>
+
+        <h1 class="reserva-exitosa-title">¡Reserva registrada!</h1>
+        <p class="reserva-exitosa-subtitle">
+            Gracias por confiar en nosotros. Tu cita ha sido agendada y pronto recibirás confirmación.
+        </p>
+
+        <div class="reserva-exitosa-details">
+            <p>
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                <span class="reserva-exitosa-highlight">Estado:</span> En procesamiento
+            </p>
+            <p>
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <span class="reserva-exitosa-highlight">Notificación:</span> Te contactaremos en <strong>menos de 24h</strong>
+            </p>
+            <p>
+                <svg viewBox="0 0 24 24"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></svg>
+                <span class="reserva-exitosa-highlight">Canal:</span> WhatsApp o llamada telefónica
+            </p>
+        </div>
+
+        <!-- QR de contacto -->
+        <div class="reserva-exitosa-qr-section">
+            <div class="reserva-exitosa-qr-title">📱 ¿Necesitas ayuda ahora?</div>
+            <div class="reserva-exitosa-qr">
+                <!-- QR generado para WhatsApp: +51 999 677 743 -->
+                <img src="/static/img/QR-Whatssap.png">
+                <!-- https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/584145824683 -->
+            </div>
+            <p style="margin-top:10px; font-size:0.85rem; color:#607d8b;">
+                Escanea para contactarnos por WhatsApp
+            </p>
+        </div>
+
+        <a href="{{ url_for('index') }}" class="reserva-exitosa-btn">
+            ← Volver al inicio
+        </a>
+
+        <p class="reserva-exitosa-footer">
+            Clínica Dental Sonrisa Perfecta • Calidad y confianza desde 2010<br>
+            📍 Av. Salaverry 1234, Lima • 📞 (01) 444-5555
+        </p>
+    </div>
+</div>
+{% endblock %}

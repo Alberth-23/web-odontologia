@@ -1,0 +1,244 @@
+<!-- templates/admin_panel.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦷 Panel de Control - Clínica Dental</title>
+    <link rel="stylesheet" href="/static/css/admin_panel.css">
+</head>
+<body class="admin-body">
+
+<div class="admin-shell">
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+        <div class="admin-sidebar__brand">
+            <div class="admin-sidebar__logo">🦷</div>
+            <div class="admin-sidebar__brand-text">
+                <span class="admin-sidebar__clinic">Clínica Dental</span>
+                <span class="admin-sidebar__tagline">Odontología Digital</span>
+            </div>
+        </div>
+
+        <nav class="admin-sidebar__nav">
+            <div class="admin-sidebar__nav-label">Panel</div>
+            <a href="#" class="admin-sidebar__nav-link admin-sidebar__nav-link--active">
+                Reservas
+            </a>
+        </nav>
+
+        <div class="admin-sidebar__user">
+            <div class="admin-sidebar__user-name">Bienvenida, Dra.</div>
+            <a href="{{ url_for('logout') }}" class="admin-sidebar__logout">Cerrar sesión</a>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="admin-main">
+        <div class="admin-container">
+
+            <!-- Barra superior -->
+            <header class="admin-toolbar">
+                <div>
+                    <h1 class="admin-toolbar__title">Panel de reservas</h1>
+                    <p class="admin-toolbar__subtitle">
+                        Visualiza y actualiza el estado de las citas registradas en la clínica.
+                    </p>
+                </div>
+                <div class="admin-toolbar__meta">
+                    <span class="toolbar-pill">
+                        Total: <strong>{{ reservas|length }}</strong> reservas
+                    </span>
+                </div>
+            </header>
+
+            {# Mensajes flash (usados por el script) #}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-wrapper">
+                {% for category, message in messages %}
+                    <div class="flash flash--{{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
+
+            <!-- Acciones principales -->
+            <section class="admin-section admin-section--actions">
+                <div class="actions">
+                    <a href="{{ url_for('admin_agregar') }}" class="btn btn-primary">
+                        ➕ Agregar Paciente Manual
+                    </a>
+                </div>
+            </section>
+
+            <!-- Tarjetas de estadísticas -->
+            <section class="admin-section admin-section--stats">
+                <div class="stats-grid">
+                    <article class="stat-card">
+                        <div class="stat-card__label">Pendientes</div>
+                        <div class="stat-card__value">
+                            {{ reservas|selectattr('estado', 'equalto', 'pendiente')|list|length }}
+                        </div>
+                        <div class="stat-card__pill stat-card__pill--pending">Por confirmar</div>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-card__label">Autorizadas</div>
+                        <div class="stat-card__value">
+                            {{ reservas|selectattr('estado', 'equalto', 'autorizada')|list|length }}
+                        </div>
+                        <div class="stat-card__pill stat-card__pill--ok">Agendadas</div>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-card__label">Atendidas</div>
+                        <div class="stat-card__value">
+                            {{ reservas|selectattr('estado', 'equalto', 'atendida')|list|length }}
+                        </div>
+                        <div class="stat-card__pill stat-card__pill--done">Finalizadas</div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Tabla de reservas -->
+            <section class="admin-section admin-section--table">
+                <div class="table-card">
+                    <div class="table-card__header">
+                        <h2 class="table-card__title">Reservas registradas</h2>
+                        <p class="table-card__subtitle">
+                            Revisa el estado de cada cita y actualízalo según su evolución.
+                        </p>
+                    </div>
+
+                    <div class="table-card__body table-wrapper">
+                        <table class="reservas-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Paciente</th>
+                                    <th>Teléfono</th>
+                                    <th>Servicio</th>
+                                    <th>Fecha / Hora</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for r in reservas %}
+                                <tr>
+                                    <td class="cell-id">
+                                        <span class="chip-id">#{{ r.id }}</span>
+                                    </td>
+
+                                    <td class="cell-paciente">
+                                        <div class="paciente-nombre">
+                                            {{ r.nombre }}
+                                        </div>
+                                        <div class="paciente-nota">
+                                            {{ r.mensaje[:60] }}{% if r.mensaje|length > 60 %}...{% endif %}
+                                        </div>
+                                    </td>
+
+                                    <td class="cell-telefono">
+                                        {{ r.telefono }}
+                                    </td>
+
+                                    <td class="cell-servicio">
+                                        {{ r.servicio }}
+                                    </td>
+
+                                    <td class="cell-fecha">
+                                        <div class="reserva-fecha">
+                                            {{ r.fecha.strftime('%d/%m/%Y') }}
+                                        </div>
+                                        <div class="reserva-hora">
+                                            {{ r.hora.strftime('%H:%M') }}
+                                        </div>
+                                    </td>
+
+                                    <td class="cell-estado">
+                                        {% if r.estado == "pendiente" %}
+                                            <span class="estado estado-pendiente">
+                                                <span class="estado-dot"></span> Pendiente
+                                            </span>
+                                        {% elif r.estado == "autorizada" %}
+                                            <span class="estado estado-autorizada">
+                                                <span class="estado-dot"></span> Autorizada
+                                            </span>
+                                        {% elif r.estado == "atendida" %}
+                                            <span class="estado estado-atendida">
+                                                <span class="estado-dot"></span> Atendida
+                                            </span>
+                                        {% else %}
+                                            <span class="estado estado-cancelada">
+                                                <span class="estado-dot"></span> Cancelada
+                                            </span>
+                                        {% endif %}
+                                    </td>
+
+                                    <td class="acciones">
+                                        {% if r.estado == "pendiente" %}
+                                            <a href="{{ url_for('autorizar', id=r.id) }}"
+                                               class="btn btn-success btn-pequeno"
+                                               onclick="return confirm('¿Autorizar a {{ r.nombre }} para {{ r.fecha }} {{ r.hora }}?')">
+                                                ✅
+                                            </a>
+                                        {% endif %}
+
+                                        {% if r.estado in ["pendiente", "autorizada"] %}
+                                            <a href="{{ url_for('atender', id=r.id) }}"
+                                               class="btn btn-primary btn-pequeno"
+                                               onclick="return confirm('¿Marcar a {{ r.nombre }} como atendido?')">
+                                                🦷
+                                            </a>
+                                        {% endif %}
+
+                                        <a href="{{ url_for('cancelar', id=r.id) }}"
+                                           class="btn btn-warning btn-pequeno"
+                                           onclick="return confirm('¿Cancelar cita de {{ r.nombre }}?')">
+                                            ❌
+                                        </a>
+
+                                        <!-- ✅ ELIMINAR PERMANENTE -->
+                                        <a href="{{ url_for('eliminar', id=r.id) }}"
+                                           class="btn btn-danger btn-pequeno"
+                                           onclick="return confirm('⚠️ ¿Eliminar PERMANENTEMENTE a {{ r.nombre }}?\nEsta acción BORRARÁ los datos de la base de datos.')">
+                                            🗑️
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="7" class="tabla-vacia">
+                                        <div class="tabla-vacia__icon">📭</div>
+                                        <div class="tabla-vacia__title">No hay reservas</div>
+                                        <div class="tabla-vacia__text">
+                                            Aún no se han registrado pacientes.
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="admin-footer">
+                Clínica Dental • Panel actualizado en tiempo real
+            </footer>
+        </div>
+    </main>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const flashes = document.querySelectorAll('.flash');
+        flashes.forEach(flash => {
+            setTimeout(() => flash.style.display = 'none', 5000);
+        });
+    });
+</script>
+</body>
+</html>

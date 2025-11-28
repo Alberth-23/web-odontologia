@@ -1,0 +1,482 @@
+/* =========================================
+   TEMA GLOBAL (CLARO / OSCURO)
+========================================= */
+
+/* Tema CLARO por defecto */
+:root {
+    /* Paleta base */
+    --clr-bg:            #f5f9ff;
+    --clr-bg-alt:        #e5f0ff;
+    --clr-surface:       #ffffff;
+    --clr-surface-soft:  #f3f7ff;
+
+    --clr-primary:       #0f9ed5;
+    --clr-primary-soft:  #7de6ff;
+    --clr-primary-dark:  #0b74ab;
+    --clr-accent:        #00d9a6;
+    --clr-accent-soft:   #bfffea;
+
+    --clr-text-main:     #0b1f33;
+    --clr-text-muted:    #6b7280;
+
+    --clr-border-soft:   #d1e3ff;
+
+    --shadow-strong:     0 24px 60px rgba(15, 23, 42, 0.18);
+    --shadow-soft:       0 14px 36px rgba(15, 23, 42, 0.16);
+
+    --radius-xl: 28px;
+    --radius-lg: 18px;
+    --radius-md: 14px;
+    --radius-pill: 999px;
+
+    --transition-fast: 0.18s ease-out;
+    --transition-med:  0.32s cubic-bezier(0.23, 1, 0.32, 1);
+    --transition-slow: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+
+    /* Gradientes / fondos */
+    --layout-bg: radial-gradient(circle at 0% 0%, #e0f2ff 0, #f5f9ff 40%, #e0ebff 100%);
+    --navbar-bg: linear-gradient(135deg, #ffffff, #e5f0ff);
+    --navbar-border: rgba(148, 163, 184, 0.25);
+    --shell-bg: linear-gradient(145deg, #ffffff, #f3f7ff);
+    --footer-bg: linear-gradient(135deg, #0b74ab, #0d47a1);
+
+    --viewport-glow1: radial-gradient(circle, rgba(59, 130, 246, 0.16), transparent 65%);
+    --viewport-glow2: radial-gradient(circle, rgba(34, 197, 94, 0.16), transparent 65%);
+}
+
+/* Tema OSCURO: sobreescribe tokens */
+html[data-theme="dark"] {
+    --clr-bg:            #050816;
+    --clr-bg-alt:        #071025;
+    --clr-surface:       rgba(9, 20, 40, 0.88);
+    --clr-surface-soft:  rgba(15, 32, 62, 0.92);
+
+    --clr-primary:       #00e1ff;
+    --clr-primary-soft:  #7de6ff;
+    --clr-primary-dark:  #0090c1;
+    --clr-accent:        #00d9a6;
+    --clr-accent-soft:   #bfffea;
+
+    --clr-text-main:     #f4f9ff;
+    --clr-text-muted:    #9caec7;
+
+    --clr-border-soft:   rgba(148, 163, 184, 0.34);
+
+    --shadow-strong:     0 28px 80px rgba(0, 0, 0, 0.85);
+    --shadow-soft:       0 18px 50px rgba(15, 23, 42, 0.75);
+
+    --layout-bg: radial-gradient(circle at 0% 0%, #0ea5e9 0, rgba(15, 23, 42, 0.9) 40%, #020617 70%, #000 100%);
+    --navbar-bg: radial-gradient(circle at top left, rgba(56, 189, 248, 0.15), transparent 60%)
+                 rgba(10, 21, 45, 0.92);
+    --navbar-border: rgba(148, 163, 184, 0.28);
+    --shell-bg: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.16), transparent 60%)
+                radial-gradient(circle at 100% 100%, rgba(0, 217, 166, 0.12), transparent 60%)
+                rgba(9, 18, 40, 0.88);
+    --footer-bg: radial-gradient(circle at 0 0, rgba(0, 225, 255, 0.24), transparent 50%)
+                 rgba(5, 12, 30, 0.98);
+
+    --viewport-glow1: radial-gradient(circle, rgba(0, 225, 255, 0.25), transparent 65%);
+    --viewport-glow2: radial-gradient(circle, rgba(0, 217, 166, 0.2), transparent 65%);
+}
+
+/* =========================================
+   BASE DEL LAYOUT
+========================================= */
+body.layout-dental {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--clr-text-main);
+    background: var(--layout-bg);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+}
+
+/* Tipografía global */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--clr-text-main);
+    letter-spacing: 0.02em;
+}
+
+p {
+    color: var(--clr-text-muted);
+}
+
+/* Enlaces generales dentro del contenido */
+main a {
+    color: var(--clr-primary-soft);
+    text-decoration: none;
+}
+main a:hover {
+    color: var(--clr-primary);
+    text-decoration: underline;
+}
+
+/* =========================================
+   HEADER · NAVBAR
+========================================= */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    backdrop-filter: blur(18px);
+}
+
+/* Navbar futurista */
+.navbar-neo {
+    background: var(--navbar-bg);
+    border-bottom: 1px solid var(--navbar-border);
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.35);
+}
+
+/* Marca / logo */
+.logo-neo {
+    text-decoration: none;
+}
+
+.logo-neo__mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 18px;
+    background: radial-gradient(circle at 30% 0, #e0faff, #00e1ff 50%, #0090c1 100%);
+    position: relative;
+    box-shadow:
+        0 0 0 2px rgba(15, 23, 42, 0.8),
+        0 0 25px rgba(0, 225, 255, 0.9);
+}
+
+/* “Diente” abstracto dentro del logo */
+.logo-neo__mark::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border-radius: 45% 45% 40% 40%;
+    background:
+        radial-gradient(circle at 20% 0, #ffffff, transparent 60%),
+        linear-gradient(150deg, #f8feff, #d5f5ff);
+    box-shadow:
+        0 0 22px rgba(191, 242, 255, 0.9),
+        0 0 0 1px rgba(240, 253, 255, 0.9);
+}
+
+/* Texto del logo */
+.logo-neo__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.logo-neo__title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--clr-text-main);
+}
+
+.logo-neo__subtitle {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--clr-text-muted);
+}
+
+/* Toggler */
+.navbar-neo .navbar-toggler {
+    color: var(--clr-text-main);
+}
+.navbar-neo .navbar-toggler-icon {
+    background-image: linear-gradient(#e5f2ff, #e5f2ff);
+    position: relative;
+}
+.navbar-neo .navbar-toggler-icon::before,
+.navbar-neo .navbar-toggler-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e5f2ff;
+}
+.navbar-neo .navbar-toggler-icon::before {
+    top: 4px;
+}
+.navbar-neo .navbar-toggler-icon::after {
+    bottom: 4px;
+}
+
+/* Links de navegación */
+.nav-link-neo {
+    position: relative;
+    padding: 0.4rem 0.9rem !important;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(26, 35, 52, 0.9);
+    transition: color var(--transition-fast);
+}
+
+html[data-theme="dark"] .nav-link-neo {
+    color: rgba(226, 232, 240, 0.9);
+}
+
+.nav-link-neo::after {
+    content: "";
+    position: absolute;
+    left: 14%;
+    right: 14%;
+    bottom: 0.1rem;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--transition-med);
+}
+
+.nav-link-neo:hover {
+    color: var(--clr-text-main);
+}
+html[data-theme="dark"] .nav-link-neo:hover {
+    color: #ffffff;
+}
+.nav-link-neo:hover::after {
+    transform: scaleX(1);
+}
+
+/* Botón contorno en el nav */
+.nav-link-neo--outline {
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    padding-inline: 1.2rem !important;
+    margin-left: 0.4rem;
+}
+.nav-link-neo--outline::after {
+    display: none;
+}
+.nav-link-neo--outline:hover {
+    background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.7), rgba(8, 47, 73, 1));
+    border-color: transparent;
+    color: #f9fafb;
+}
+
+/* Estado activo (si lo asignas con .active) */
+.nav-link-neo.active {
+    color: var(--clr-text-main);
+}
+html[data-theme="dark"] .nav-link-neo.active {
+    color: #ffffff;
+}
+.nav-link-neo.active::after {
+    transform: scaleX(1);
+}
+
+/* Botón de cambio de tema */
+.theme-toggle-wrapper {
+    margin-top: 4px;
+}
+
+.btn-theme-toggle {
+    border-radius: 999px;
+    border: 1px solid var(--clr-border-soft);
+    background: var(--clr-surface-soft);
+    color: var(--clr-text-main);
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition:
+        background 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        transform 0.18s ease-out,
+        border-color 0.18s ease-out;
+}
+
+.btn-theme-toggle:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+}
+
+/* =========================================
+   MAIN VIEWPORT
+========================================= */
+.main-viewport {
+    min-height: calc(100vh - 150px); /* aproximado con header+footer */
+    position: relative;
+    padding-top: 1.6rem;
+}
+
+/* Capas de luz de fondo */
+.main-viewport::before,
+.main-viewport::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.main-viewport::before {
+    width: 540px;
+    height: 540px;
+    border-radius: 50%;
+    background: var(--viewport-glow1);
+    top: 10%;
+    right: -140px;
+    filter: blur(2px);
+}
+
+.main-viewport::after {
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: var(--viewport-glow2);
+    bottom: -80px;
+    left: -140px;
+    filter: blur(3px);
+}
+
+/* Contenedor central tipo “glass panel” */
+.main-shell {
+    position: relative;
+    border-radius: var(--radius-xl);
+    background: var(--shell-bg);
+    border: 1px solid var(--clr-border-soft);
+    box-shadow: var(--shadow-strong);
+    margin-top: 1.4rem;
+    margin-bottom: 1.4rem;
+    overflow: hidden;
+}
+
+/* Borde luminoso superior (solo se nota más en oscuro) */
+.main-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+        linear-gradient(90deg, rgba(0, 225, 255, 0.4), rgba(148, 163, 184, 0), transparent);
+    opacity: 0.25;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+/* =========================================
+   ELEMENTOS COMUNES DENTRO DEL MAIN
+========================================= */
+
+/* Títulos de sección dentro del main */
+.main-shell h1,
+.main-shell h2 {
+    text-shadow: 0 0 18px rgba(0, 225, 255, 0.2);
+}
+
+/* Cartas de Bootstrap integradas al estilo */
+.main-shell .card {
+    background: var(--clr-surface-soft);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--clr-border-soft);
+    box-shadow: var(--shadow-soft);
+    color: var(--clr-text-main);
+}
+
+.main-shell .card-header {
+    border-bottom-color: rgba(148, 163, 184, 0.3);
+    background: radial-gradient(circle at 0 0, rgba(0, 225, 255, 0.12), transparent 60%);
+    color: var(--clr-text-main);
+}
+
+.main-shell .card-body {
+    color: var(--clr-text-main);
+}
+
+/* Botones de Bootstrap adaptados a la paleta */
+.btn-primary {
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
+    border: none;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.85);
+}
+.btn-primary:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+}
+.btn-outline-primary {
+    border-color: var(--clr-primary-soft);
+    color: var(--clr-primary-soft);
+}
+.btn-outline-primary:hover {
+    background: var(--clr-primary-soft);
+    border-color: var(--clr-primary-soft);
+    color: #020617;
+}
+
+/* Formularios */
+form .form-control {
+    background: var(--clr-surface);
+    border-radius: 12px;
+    border: 1px solid var(--clr-border-soft);
+    color: var(--clr-text-main);
+}
+html[data-theme="dark"] form .form-control {
+    background: rgba(15, 23, 42, 0.96);
+}
+form .form-control:focus {
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 1px rgba(0, 225, 255, 0.6);
+    background: var(--clr-surface);
+    color: var(--clr-text-main);
+}
+html[data-theme="dark"] form .form-control:focus {
+    background: rgba(15, 23, 42, 0.98);
+}
+form .form-label {
+    color: var(--clr-text-muted);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+.site-footer {
+    border-top: 1px solid rgba(148, 163, 184, 0.35);
+    background: var(--footer-bg);
+    padding: 1.3rem 0 1.5rem;
+    box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.7);
+}
+
+.footer-title {
+    color: var(--clr-text-main);
+    font-size: 0.9rem;
+}
+
+.footer-subtitle {
+    color: var(--clr-text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 991.98px) {
+    .main-shell {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 22px;
+    }
+
+    .navbar-neo {
+        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.28);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .main-shell {
+        border-radius: 18px;
+        padding-inline: 1.1rem !important;
+    }
+
+    .logo-neo__title {
+        font-size: 1rem;
+    }
+}
