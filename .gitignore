@@ -8,3 +8,5 @@ config.py
 secrets.py
 database.db
 .DS_Store
+reservas.db
+static/img/QR-Whatssap.png
