@@ -1,4 +1,4 @@
-# app.py — Panel de Control Dental — Completo y funcional
+# app.py — Panel de Control Dental — Versión para Render ✅
 import os
 import logging
 from datetime import datetime
@@ -9,21 +9,24 @@ from flask import (
     Flask, render_template, request, redirect, url_for,
     session, flash
 )
-from config import Config
 from extensions.database import db
 from models.reservas import Reserva
 
-# === Configuración ===
+# === Configuración segura desde variables de entorno ===
 logging.basicConfig(level=logging.INFO)
 app = Flask(__name__)
-app.config.from_object(Config)
-app.secret_key = app.config.get("SECRET_KEY", "clave-secreta-temporal")
+
+# 🔐 Carga dinámica (nada hardcodeado)
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'clave-temporal-solo-para-desarrollo-local')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = app.config['SECRET_KEY']
 
 # === Inicialización ===
 db.init_app(app)
 
 # === Seguridad ===
-ADMIN_PIN = os.getenv("ADMIN_PIN", "1234")
+ADMIN_PIN = os.getenv("ADMIN_PIN", "1234")  # ✅ desde entorno
 
 def login_required(f):
     @wraps(f)
@@ -43,7 +46,6 @@ def hay_solapamiento(fecha, hora, exclude_id=None):
     ).first() is not None
 
 def enviar_whatsapp_notificacion(reserva):
-    """Envía notificación al paciente al autorizar."""
     if not reserva.telefono:
         return
     
@@ -62,9 +64,9 @@ def enviar_whatsapp_notificacion(reserva):
     
     url = f"https://wa.me/{telefono}?text={urllib.parse.quote(mensaje)}"
     logging.info(f"📲 WhatsApp para {reserva.nombre}: {url}")
-    # En producción: usa requests o un worker asíncrono
+    # ✅ En Render: usa esto como hook o integra con un worker asíncrono después
 
-# === Tablas ===
+# === Crear tablas al iniciar ===
 with app.app_context():
     try:
         db.create_all()
@@ -130,7 +132,7 @@ def reserva_exitosa():
 def health_check():
     try:
         db.session.execute(db.text("SELECT 1"))
-        return {"status": "ok"}
+        return {"status": "ok"}, 200
     except Exception as e:
         return {"status": "error", "msg": str(e)}, 500
 
@@ -213,7 +215,7 @@ def cancelar(id):
 def eliminar(id):
     r = Reserva.query.get_or_404(id)
     nombre = r.nombre
-    db.session.delete(r)  # ✅ ELIMINACIÓN REAL EN LA BASE DE DATOS
+    db.session.delete(r)
     db.session.commit()
     flash(f"🗑️ {nombre} eliminado permanentemente", "info")
     return redirect(url_for("admin_panel"))
@@ -221,7 +223,6 @@ def eliminar(id):
 @app.route("/admin/agregar", methods=["GET", "POST"])
 @login_required
 def admin_agregar():
-    # Últimas 20 reservas para búsqueda
     reservas_pasadas = Reserva.query.order_by(
         Reserva.creado_en.desc()
     ).limit(20).all()
@@ -266,4 +267,5 @@ def admin_agregar():
 
 # === Ejecución ===
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)  # ✅ debug=False en Render
