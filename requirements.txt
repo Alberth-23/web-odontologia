@@ -1,2 +1,4 @@
 Flask
 Flask_SQLAlchemy
+gunicorn==22.0.0
+psycopg2-binary==2.9.10
