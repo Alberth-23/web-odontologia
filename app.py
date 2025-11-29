@@ -1,4 +1,4 @@
-# app.py — Panel de Control Dental — Versión para Render ✅
+# app.py — Panel de Control Dental — ✅ Render + PostgreSQL Listo
 import os
 import logging
 from datetime import datetime
@@ -12,21 +12,25 @@ from flask import (
 from extensions.database import db
 from models.reservas import Reserva
 
-# === Configuración segura desde variables de entorno ===
+# === 🔐 Configuración segura desde variables de entorno ===
 logging.basicConfig(level=logging.INFO)
-app = Flask(__name__)
 
-# 🔐 Carga dinámica (nada hardcodeado)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'clave-temporal-solo-para-desarrollo-local')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = app.config['SECRET_KEY']
+# Validación estricta: falla si falta algo crítico
+required_vars = ["SECRET_KEY", "DATABASE_URL", "ADMIN_PIN"]
+for var in required_vars:
+    if not os.getenv(var):
+        raise RuntimeError(f"❌ FATAL: Variable de entorno '{var}' no definida. Configúrala en Render.")
+
+app = Flask(__name__)
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # === Inicialización ===
 db.init_app(app)
 
 # === Seguridad ===
-ADMIN_PIN = os.getenv("ADMIN_PIN", "1234")  # ✅ desde entorno
+ADMIN_PIN = os.getenv("ADMIN_PIN")  # Ya validado arriba
 
 def login_required(f):
     @wraps(f)
@@ -64,15 +68,14 @@ def enviar_whatsapp_notificacion(reserva):
     
     url = f"https://wa.me/{telefono}?text={urllib.parse.quote(mensaje)}"
     logging.info(f"📲 WhatsApp para {reserva.nombre}: {url}")
-    # ✅ En Render: usa esto como hook o integra con un worker asíncrono después
 
 # === Crear tablas al iniciar ===
 with app.app_context():
     try:
         db.create_all()
-        logging.info("✅ Tablas listas.")
+        logging.info("✅ Tablas creadas o ya existen.")
     except Exception as e:
-        logging.error(f"❌ Error DB: {e}")
+        logging.error(f"❌ Error al inicializar DB: {e}")
         raise
 
 # === Rutas públicas ===
@@ -268,4 +271,4 @@ def admin_agregar():
 # === Ejecución ===
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)  # ✅ debug=False en Render
+    app.run(host="0.0.0.0", port=port, debug=False)
