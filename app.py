@@ -5,6 +5,11 @@ from datetime import datetime
 import urllib.parse
 from functools import wraps
 
+# ✅ Cargar .env solo en desarrollo (opcional, seguro)
+if os.getenv("FLASK_ENV") != "production":
+    from dotenv import load_dotenv
+    load_dotenv()  # carga .env → variables disponibles en os.getenv()
+
 from flask import (
     Flask, render_template, request, redirect, url_for,
     session, flash
